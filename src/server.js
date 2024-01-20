@@ -11,16 +11,6 @@ const setupAndStartServer = () => {
         console.log(`server started on port : ${PORT}`);
         await connect();
         console.log(`connected to mongodb`);
-
-        // const tweetRepo = new TweetRepo();
-    
-        // const tweets = await tweetRepo.getAll(0,4);
-        // console.log(tweets);
-        
-        // console.log(tweets[3].tweetContentAndEmail);
-
-        // const tweet = await tweetRepo.create({content: "last tweet of the day"});
-        // console.log(tweet);
     });
 }
 
