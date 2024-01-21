@@ -4,15 +4,10 @@ const tweetSchema = mongoose.Schema({
    
     content : {
         type: String,
-        required: true
-    },
-
-    hashtags : [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref : "Hashtag"
-        }
-    ]
+        required: [true, "cannot create tweet with empty content"],
+        max: [300, "tweet cannot exceed 300 characters"]
+    }
+    
 },{timestamps: true});
 
 const Tweet = mongoose.model('Tweet',tweetSchema);
