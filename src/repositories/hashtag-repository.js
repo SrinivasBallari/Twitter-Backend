@@ -1,5 +1,5 @@
 const Hashtag = require('../models/hashtag');
-const {CrudRepo} = require('./index');
+const CrudRepo = require('./crud-repository');
 
 class HashtagRepo extends CrudRepo{
     

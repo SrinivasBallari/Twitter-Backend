@@ -6,7 +6,14 @@ const tweetSchema = mongoose.Schema({
         type: String,
         required: [true, "cannot create tweet with empty content"],
         max: [300, "tweet cannot exceed 300 characters"]
-    }
+    },
+
+    likes : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref : 'Like'
+        }
+    ]
     
 },{timestamps: true});
 

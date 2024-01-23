@@ -10,21 +10,18 @@ class TweetService {
     #extractTags(data){
         const tweet = data.content;
         let tags = tweet.match(/#[a-zA-Z0-9_]+/g);
-        tags = tags.map((tag) => {
-            tag.substring(1).toLowerCase();
-        });
+        if(tags){
+            tags = tags.map(tag => tag.substring(1).toLowerCase());
+        }
         return tags;
     }
 
     #identifyAndFilterNewTags(tagsInCurrentTweet, existingTags){
 
-        const tagTitlesInExistingTags = existingTags.map(
-            (tag) => tag.title
-        );
-        const newTags = tagsInCurrentTweet.filter(
-            (tag) => !existingTags.includes(tag)
-        );
-
+        if(tagsInCurrentTweet){
+            const tagTitlesInExistingTags = existingTags.map(tag => tag.title);
+            var newTags = tagsInCurrentTweet.filter(tag => !existingTags.includes(tag));
+        }
         return newTags;
     }
 
@@ -34,20 +31,22 @@ class TweetService {
             const tweetId = tweet.id;
             const tagsInCurrentTweet = this.#extractTags(data);
             let existingTags = await this.hashtagRepo.findAll(tagsInCurrentTweet);
-    
             let newTags = this.#identifyAndFilterNewTags(tagsInCurrentTweet, existingTags);
-            newTags = newTags.map((tag) => {
-                return {
-                    title: tag,
-                    tweets: [tweetId]
-                }
-            });
-    
+            if(newTags){
+                newTags = newTags.map((tag) => {
+                    return {
+                        title: tag,
+                        tweets: [tweetId]
+                    }
+                });
+            }
+        
             existingTags.forEach( async (tag) => {
                 tag.tweets.push(tweetId);
                 await tag.save();
             });
-    
+            
+            console.log("data: \n", data);
             await this.hashtagRepo.bulkCreate(newTags);
             return tweet;
         } catch (error) {

@@ -1,8 +1,9 @@
 const Tweet = require('../models/tweet');
+const CrudRepo = require('./crud-repository');
 
-class TweetRepo {
+class TweetRepo extends CrudRepo {
 
-    constructor(){
+    constructor() {
         super(Tweet);
     }
 
@@ -18,6 +19,15 @@ class TweetRepo {
     async getAll(offset, limit){
         try {
             const tweet = await Tweet.find().skip(offset).limit(limit);
+            return tweet;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async find(id){
+        try {
+            const tweet = await Tweet.findById(id).populate({path : 'likes'});
             return tweet;
         } catch (error) {
             console.log(error);

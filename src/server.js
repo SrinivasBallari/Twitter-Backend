@@ -14,7 +14,12 @@ const setupAndStartServer = () => {
         console.log(`server started on port : ${PORT}`);
         await connect();
         console.log(`connected to mongodb`);
+
+        
+
     });
+
+
 }
 
 setupAndStartServer();
