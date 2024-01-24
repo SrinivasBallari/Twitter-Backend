@@ -17,17 +17,17 @@ class LikeService {
             throw new Error('unknown modelType !!');
         }
 
-        const likeExists = await this.likeRepo.findByUserAndLikeable({
+        const likeExists = await this.likeRepo.findByUserAndLikable({
             likeable : modelId,
             onModel : modelType,
             user : userId
         });
+        console.log(likeExists);
 
         if(likeExists) {
             likeable.likes.pull(likeExists.id);
             await likeable.save();
-            await likeExists.remove();
-
+            await likeExists.deleteOne();
             var isAdded = false;
         }else {
             const newLike = await this.likeRepo.create({

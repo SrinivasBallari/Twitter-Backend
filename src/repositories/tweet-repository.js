@@ -18,8 +18,8 @@ class TweetRepo extends CrudRepo {
 
     async getAll(offset, limit){
         try {
-            const tweet = await Tweet.find().skip(offset).limit(limit);
-            return tweet;
+            const tweets = await Tweet.find().skip(offset).limit(limit);
+            return tweets;
         } catch (error) {
             console.log(error);
         }

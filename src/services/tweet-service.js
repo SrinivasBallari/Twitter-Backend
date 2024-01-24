@@ -46,7 +46,6 @@ class TweetService {
                 await tag.save();
             });
             
-            console.log("data: \n", data);
             await this.hashtagRepo.bulkCreate(newTags);
             return tweet;
         } catch (error) {
