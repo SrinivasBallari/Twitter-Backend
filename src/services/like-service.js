@@ -22,7 +22,6 @@ class LikeService {
             onModel : modelType,
             user : userId
         });
-        console.log(likeExists);
 
         if(likeExists) {
             likeable.likes.pull(likeExists.id);

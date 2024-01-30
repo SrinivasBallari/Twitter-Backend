@@ -3,5 +3,6 @@ module.exports = {
     CrudRepo : require('./crud-repository'),
     HashtagRepo : require('./hashtag-repository'),
     UserRepo : require('./user-repository'),
-    LikeRepo: require('./like-repository')
+    LikeRepo: require('./like-repository'),
+    CommentRepo: require('./comment-repository')
 }
