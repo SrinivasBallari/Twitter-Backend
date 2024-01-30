@@ -10,4 +10,6 @@ router.post('/likes/toggleLike',LikeController.toggleLike);
 
 router.post('/comments/create',CommentController.createComment);
 
+router.get('/tweets/:id', TweetController.getTweet);
+
 module.exports = router;
