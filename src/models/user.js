@@ -27,7 +27,11 @@ userSchema.pre('save', function(next){
     const encryptedPassword = bcrypt.hashSync(user.password, SALT);
     user.password = encryptedPassword;
     next();
-})
+});
+
+userSchema.methods.comparePassword = function compare(password) {
+    return bcrypt.compareSync(password,this.password);
+}
 
 const User = mongoose.model('User',userSchema);
 
